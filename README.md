@@ -2,21 +2,20 @@
 
 ## users テーブル
 
-| Column          | Type   | Options     |
-| --------------- | ------ | ----------- |
-| nickname        | string | null: false |
-| email           | string | null: false |
-| password        | string | null: false |
-| last_name       | string | null: false |
-| first_name      | string | null: false |
-| last_name_kana  | string | null: false |
-| first_name_kana | string | null: false |
-| birthday        | date   | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 
 - has_many :items
-- belongs_to :destination
 - belongs_to :card
 
 ## items テーブル
@@ -43,10 +42,6 @@
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| last_name       | string     | null: false                    |
-| first_name      | string     | null: false                    |
-| last_name_kana  | string     | null: false                    |
-| first_name_kana | string     | null: false                    |
 | postcode        | string     | null: false                    |
 | prefecture      | string     | null: false                    |
 | city            | string     | null: false                    |
@@ -58,35 +53,14 @@
 
 - belongs_to :user
 
-## card テーブル
+## order テーブル
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
 | user_id     | references | null: false, foreign_key: true |
-| customer_id | string     | null: false                    |
-| card_id     | string     | null: false                    |
+| item_id     | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-
-## category
-
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
-
-### Association
-
-- has_many :items
-
-## image テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| image   | string     | null: false                    |
-| item_id | references | null: false, foreign_key: true |
-
-### Association
-
 - belongs_to :item
