@@ -1,24 +1,92 @@
-# README
+#テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column          | Type   | Options     |
+| --------------- | ------ | ----------- |
+| nickname        | string | null: false |
+| email           | string | null: false |
+| password        | string | null: false |
+| last_name       | string | null: false |
+| first_name      | string | null: false |
+| last_name_kana  | string | null: false |
+| first_name_kana | string | null: false |
+| birthday        | date   | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- belongs_to :destination
+- belongs_to :card
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| name        | string     | null: false                    |
+| description | text       | null: false                    |
+| status      | text       | null: false                    |
+| postage     | string     | null: false                    |
+| prefecture  | string     | null: false                    |
+| days        | string     | null: false                    |
+| price       | string     | null: false                    |
+| category_id | references | null: false, foreign_key: true |
+| user_id     | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- belongs_to :category
+- belongs_to :image
 
-* Services (job queues, cache servers, search engines, etc.)
+## destination テーブル
 
-* Deployment instructions
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| last_name       | string     | null: false                    |
+| first_name      | string     | null: false                    |
+| last_name_kana  | string     | null: false                    |
+| first_name_kana | string     | null: false                    |
+| postcode        | string     | null: false                    |
+| prefecture      | string     | null: false                    |
+| city            | string     | null: false                    |
+| block           | string     | null: false                    |
+| phone_number    | string     | null: false                    |
+| user_id         | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :user
+
+## card テーブル
+
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| user_id     | references | null: false, foreign_key: true |
+| customer_id | string     | null: false                    |
+| card_id     | string     | null: false                    |
+
+### Association
+
+- belongs_to :user
+
+## category
+
+| Column | Type   | Options     |
+| ------ | ------ | ----------- |
+| name   | string | null: false |
+
+### Association
+
+- has_many :items
+
+## image テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| image   | string     | null: false                    |
+| item_id | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
