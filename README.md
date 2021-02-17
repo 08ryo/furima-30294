@@ -16,51 +16,52 @@
 ### Association
 
 - has_many :items
-- belongs_to :card
+- has_many :order
 
 ## items テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| name        | string     | null: false                    |
-| description | text       | null: false                    |
-| status      | text       | null: false                    |
-| postage     | string     | null: false                    |
-| prefecture  | string     | null: false                    |
-| days        | string     | null: false                    |
-| price       | string     | null: false                    |
-| category_id | references | null: false, foreign_key: true |
-| user_id     | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| name          | string     | null: false                    |
+| description   | text       | null: false                    |
+| status_id     | integer    | null: false                    |
+| postage_id    | integer    | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| days_id       | integer    | null: false                    |
+| price         | integer    | null: false                    |
+| category_id   | integer    | null: false                    |
+| user_id       | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :category
-- belongs_to :image
+- belongs_to :order
 
 ## destination テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| postcode        | string     | null: false                    |
-| prefecture      | string     | null: false                    |
+| postcode_id     | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | block           | string     | null: false                    |
+| building        | string     | null: false                    |
 | phone_number    | string     | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
+- belongs_to :order
 
 ## order テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| user_id     | references | null: false, foreign_key: true |
-| item_id     | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
+- belongs_to :destination
