@@ -30,7 +30,7 @@
 | days_id       | integer    | null: false                    |
 | price         | integer    | null: false                    |
 | category_id   | integer    | null: false                    |
-| user_id       | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -45,9 +45,9 @@
 | prefecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | block           | string     | null: false                    |
-| building        | string     | null: false                    |
+| building        | string     |                                |
 | phone_number    | string     | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| order           | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -64,4 +64,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :destination
+- has_one :destination
